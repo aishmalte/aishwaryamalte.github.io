@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aishwarya & Malte — Wedding</title>
+  <meta name="description" content="Wedding website for Aishwarya & Malte — itinerary, functions, gallery, RSVP, travel & more details." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --sage-900:#2f3c2f; /* dark sage text */
+      --sage-700:#516a51; /* headings / accents */
+      --sage-500:#7f9b7f; /* buttons / highlights */
+      --sage-300:#a9bea9; /* subtle accents */
+      --cream-50:#fffefb; /* base background */
+      --cream-100:#faf7f2; /* sections */
+      --cream-200:#f2eee8; /* cards */
+      --ink:#1c2420;       /* body text */
+      --muted:#5b645e;     /* muted text */
+      --shadow: 0 10px 25px rgba(0,0,0,.08);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink); background:var(--cream-50); line-height:1.6;
+    }
+    h1,h2,h3,h4{font-family:"Playfair Display", Georgia, serif; color:var(--sage-900); line-height:1.25}
+    h1{font-size:clamp(2rem,4vw,3rem)}
+    h2{font-size:clamp(1.6rem,3vw,2.2rem); margin:0 0 .25rem}
+    p{margin:.5rem 0 1rem}
+    a{color:var(--sage-700); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Container */
+    .wrap{width:min(1100px, 92vw); margin-inline:auto}
+
+    /* Nav */
+    .nav{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.3) blur(6px);
+      background:rgba(250,247,242,.85); border-bottom:1px solid var(--cream-200);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:.8rem 1rem}
+    .brand{display:flex; align-items:center; gap:.7rem; font-weight:700; letter-spacing:.4px}
+    .brand .logo{width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--sage-500), var(--sage-300)); display:grid; place-items:center; color:white; font-weight:700}
+    .menu{display:flex; gap:1rem; align-items:center}
+    .menu a{padding:.5rem .7rem; border-radius:10px; font-weight:600; color:var(--sage-900)}
+    .menu a:hover{background:var(--cream-200)}
+    .menu-toggle{display:none; border:0; background:transparent; font-size:1.2rem}
+
+    @media (max-width: 860px){
+      .menu{display:none}
+      .menu-toggle{display:block}
+      .menu.mobile{display:grid; gap:.4rem; padding:0 1rem 1rem}
+      .menu.mobile a{background:var(--cream-200)}
+    }
+
+    /* Hero */
+    .hero{
+      position:relative; min-height:70svh; display:grid; place-items:center; text-align:center; color:white;
+      background:#2a3a2a; /* fallback */
+      isolation:isolate;
+    }
+    .hero::before{
+      /* ======== Replace this image with your own banner ========
+         Put your file at /images/banner.jpg and it will load. */
+      content:""; position:absolute; inset:0;
+      background: url('./images/banner.jpg') center/cover no-repeat;
+      opacity:.92; z-index:-2;
+    }
+    .hero::after{
+      content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(33,45,33,.2), rgba(33,45,33,.55)); z-index:-1
+    }
+    .hero .card{
+      background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.35); border-radius:var(--radius);
+      padding:clamp(1rem, 3vw, 2rem); box-shadow:var(--shadow); backdrop-filter: blur(6px);
+    }
+    .names{font-size:clamp(2rem,5vw,3.2rem); font-weight:700; letter-spacing:.6px}
+    .date{font-family:"Playfair Display", serif; font-size:clamp(1rem,2.2vw,1.3rem)}
+    .cta{margin-top:1rem; display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap}
+    .btn{display:inline-block; padding:.7rem 1rem; border-radius:999px; font-weight:700; border:1px solid transparent}
+    .btn.primary{background:var(--cream-50); color:var(--sage-900)}
+    .btn.ghost{background:transparent; color:white; border-color:rgba(255,255,255,.6)}
+
+    /* Sections */
+    section{padding: clamp(2rem, 6vw, 4rem) 0; background:var(--cream-50)}
+    section.alt{background:var(--cream-100)}
+    .section-head{display:flex; align-items:end; justify-content:space-between; gap:1rem; margin-bottom:1.2rem}
+    .lead{color:var(--muted)}
+
+    /* Cards & Grids */
+    .grid{display:grid; gap:1rem}
+    .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+    .grid.cols-2{grid-template-columns: repeat(2, 1fr)}
+    .grid.cols-4{grid-template-columns: repeat(4, 1fr)}
+    @media (max-width: 900px){
+      .grid.cols-4{grid-template-columns: repeat(3, 1fr)}
+      .grid.cols-3{grid-template-columns: repeat(2, 1fr)}
+    }
+    @media (max-width: 640px){
+      .grid.cols-4,.grid.cols-3,.grid.cols-2{grid-template-columns: 1fr}
+    }
+    .card{
+      background:var(--cream-100); border:1px solid var(--cream-200); border-radius:var(--radius); padding:1rem; box-shadow:var(--shadow)
+    }
+
+    /* Itinerary */
+    .timeline{position:relative; margin:1rem 0}
+    .timeline::before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px; background:var(--sage-300)}
+    .slot{position:relative; padding-left:2.6rem; margin:1.1rem 0}
+    .dot{position:absolute; left:6px; top:.3rem; width:14px; height:14px; border-radius:50%; background:var(--sage-500); box-shadow:0 0 0 3px var(--cream-50)}
+    .slot h3{margin:0; font-size:1.05rem}
+    .meta{color:var(--muted); font-size:.95rem}
+
+    /* Gallery */
+    .gallery{display:grid; grid-template-columns: repeat(3, 1fr); gap:.7rem}
+    .gallery img{width:100%; aspect-ratio: 1/1; object-fit:cover; border-radius:12px; border:1px solid var(--cream-200)}
+    @media (max-width:800px){.gallery{grid-template-columns: repeat(2, 1fr)}}
+    @media (max-width:520px){.gallery{grid-template-columns: 1fr}}
+
+    /* Footer */
+    footer{background:var(--cream-100); border-top:1px solid var(--cream-200); padding:1.2rem 0; color:var(--muted)}
+
+    /* Helpers */
+    .chip{display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:.85rem; background:var(--cream-200); color:var(--sage-900); border:1px solid var(--cream-200)}
+    .note{font-size:.95rem; color:var(--muted)}
+    .spacer{height:1.2rem}
+  </style>
+</head>
+<body>
+  <!-- ====================== NAV ======================= -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">AM</div>
+        <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
+      </div>
+      <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+      <div id="menu" class="menu" role="navigation" aria-label="Main">
+        <a href="#itinerary">Itinerary</a>
+        <a href="#functions">Details of Functions</a>
+        <a href="#gallery">Photo Gallery</a>
+        <a href="#rsvp">RSVP</a>
+        <a href="#travel">Travel Details</a>
+        <a href="#more">More Details</a>
+      </div>
+    </div>
+    <div id="menuMobile" class="menu mobile wrap" hidden>
+      <a href="#itinerary" onclick="toggleMenu(true)">Itinerary</a>
+      <a href="#functions" onclick="toggleMenu(true)">Details of Functions</a>
+      <a href="#gallery" onclick="toggleMenu(true)">Photo Gallery</a>
+      <a href="#rsvp" onclick="toggleMenu(true)">RSVP</a>
+      <a href="#travel" onclick="toggleMenu(true)">Travel Details</a>
+      <a href="#more" onclick="toggleMenu(true)">More Details</a>
+    </div>
+  </nav>
+
+  <!-- ====================== HERO ======================= -->
+  <header class="hero" id="home">
+    <div class="wrap">
+      <div class="card">
+        <div class="chip">You're invited</div>
+        <h1 class="names">Aishwarya &amp; Malte</h1>
+        <p class="date">Wedding Celebrations — <span contenteditable="true">April 2026</span></p>
+        <div class="cta">
+          <a class="btn primary" href="#rsvp">RSVP</a>
+          <a class="btn ghost" href="#itinerary">View Itinerary</a>
+        </div>
+        <p class="note" style="margin-top:.8rem">Tip: Replace <code>/images/banner.jpg</code> with your banner photo for the top section.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================== ITINERARY ======================= -->
+  <section id="itinerary" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Itinerary</h2>
+          <p class="lead">Key dates, timings and venues.</p>
+        </div>
+        <span class="chip">Edit directly in the HTML</span>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Day 1 — <span contenteditable="true">Sangeet &amp; Welcome</span></h3>
+          <div class="timeline">
+            <div class="slot">
+              <div class="dot"></div>
+              <h3>Welcome &amp; Check‑in</h3>
+              <div class="meta">15:00 – 17:00 • <span contenteditable="true">Hotel Name</span></div>
+              <p class="note">Dress code: Casual festive</p>
+            </div>
+            <div class="slot">
+              <div class="dot"></div>
+              <h3>Sangeet Night</h3>
+              <div class="meta">19:00 – 22:30 • <span contenteditable="true">Emerald Lawn</span></div>
+              <p class="note">Dress code: Sparkle &amp; dance 💃</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Day 2 — <span contenteditable="true">Haldi &amp; Mehendi</span></h3>
+          <div class="timeline">
+            <div class="slot">
+              <div class="dot"></div>
+              <h3>Haldi</h3>
+              <div class="meta">10:00 – 11:30 • <span contenteditable="true">Courtyard</span></div>
+              <p class="note">Dress code: Yellows &amp; whites</p>
+            </div>
+            <div class="slot">
+              <div class="dot"></div>
+              <h3>Mehendi</h3>
+              <div class="meta">12:00 – 14:30 • <span contenteditable="true">Neem Hall</span></div>
+              <p class="note">Dress code: Greens &amp; florals</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Day 3 — <span contenteditable="true">Wedding</span></h3>
+          <div class="timeline">
+            <div class="slot">
+              <div class="dot"></div>
+              <h3>Baraat &amp; Milni</h3>
+              <div class="meta">15:30 – 16:30 • <span contenteditable="true">Gateway</span></div>
+            </div>
+            <div class="slot">
+              <div class="dot"></div>
+              <h3>Varmala &amp; Pheras</h3>
+              <div class="meta">17:00 – 19:00 • <span contenteditable="true">Mandap</span></div>
+            </div>
+            <div class="slot">
+              <div class="dot"></div>
+              <h3>Dinner Reception</h3>
+              <div class="meta">19:30 – 22:00 • <span contenteditable="true">Ballroom</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Day 4 — <span contenteditable="true">Farewell Brunch</span></h3>
+          <div class="timeline">
+            <div class="slot">
+              <div class="dot"></div>
+              <h3>Brunch</h3>
+              <div class="meta">10:30 – 12:30 • <span contenteditable="true">Garden Café</span></div>
+              <p class="note">Dress code: Summer chic</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+      <p class="note">Need to add maps? Paste a Google Maps embed (Share → Embed a map → copy iframe) under each slot above.</p>
+    </div>
+  </section>
+
+  <!-- ====================== DETAILS OF FUNCTIONS ======================= -->
+  <section id="functions">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Details of Functions</h2>
+          <p class="lead">What to expect &amp; what to wear.</p>
+        </div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Sangeet</h3>
+          <p>Dance, music and family performances. Light bites &amp; mocktails served.</p>
+          <p class="note">Dress code: Festive &amp; sparkly</p>
+        </div>
+        <div class="card">
+          <h3>Haldi</h3>
+          <p>Traditional turmeric ceremony — expect joyful color! Towels &amp; wipes available.</p>
+          <p class="note">Dress code: Yellow/white, easy‑washables</p>
+        </div>
+        <div class="card">
+          <h3>Mehendi</h3>
+          <p>Henna artists on site. Light lunch, lemonade &amp; chai.</p>
+          <p class="note">Dress code: Greens, florals, airy</p>
+        </div>
+        <div class="card">
+          <h3>Wedding &amp; Pheras</h3>
+          <p>Sacred vows under the mandap. Please be seated 15 mins before the ceremony.</p>
+          <p class="note">Dress code: Traditional / formal</p>
+        </div>
+        <div class="card">
+          <h3>Reception</h3>
+          <p>Dinner, speeches and dancing. Live band &amp; photo booth.</p>
+          <p class="note">Dress code: Black tie optional / Indian formal</p>
+        </div>
+        <div class="card">
+          <h3>Farewell Brunch</h3>
+          <p>Relaxed gathering to say our goodbyes and share memories.</p>
+          <p class="note">Dress code: Summer casual</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== GALLERY ======================= -->
+  <section id="gallery" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Photo Gallery</h2>
+          <p class="lead">A few moments &amp; places we love. Replace with your own photos.</p>
+        </div>
+        <span class="chip">Place images in <code>/images/gallery/</code></span>
+      </div>
+
+      <div class="gallery">
+        <!-- Replace these with your images inside /images/gallery/ -->
+        <img src="./images/gallery/1.jpg" alt="Gallery image 1" loading="lazy">
+        <img src="./images/gallery/2.jpg" alt="Gallery image 2" loading="lazy">
+        <img src="./images/gallery/3.jpg" alt="Gallery image 3" loading="lazy">
+        <img src="./images/gallery/4.jpg" alt="Gallery image 4" loading="lazy">
+        <img src="./images/gallery/5.jpg" alt="Gallery image 5" loading="lazy">
+        <img src="./images/gallery/6.jpg" alt="Gallery image 6" loading="lazy">
+      </div>
+
+      <p class="note" style="margin-top:.8rem">Tip: keep images ~1500px on the long side for fast loading.</p>
+    </div>
+  </section>
+
+  <!-- ====================== RSVP ======================= -->
+  <section id="rsvp">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>RSVP</h2>
+          <p class="lead">Please let us know if you’ll be joining us — we can’t wait to celebrate together.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <p><strong>Coming soon:</strong> Embed your Google Form here.</p>
+        <ol class="note">
+          <li>Create a Google Form → click <em>Send</em> → &lt;&gt; <em>Embed HTML</em> → copy the <code>&lt;iframe&gt;</code>.</li>
+          <li>Paste it below, replacing the placeholder comment.</li>
+        </ol>
+        <!-- === Paste your Google Form <iframe> below === -->
+        <!-- <iframe src="YOUR_GOOGLE_FORM_EMBED_URL" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== TRAVEL DETAILS ======================= -->
+  <section id="travel" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Travel Details</h2>
+          <p class="lead">How to get there, where to stay, and local tips.</p>
+        </div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Venues</h3>
+          <p><strong contenteditable="true">Main Venue Name</strong><br>
+            <span contenteditable="true">Full address, City</span></p>
+          <div class="note">Add a Google Maps embed below (Share → Embed a map → copy iframe):</div>
+          <!-- <iframe src="MAP_EMBED_URL" width="100%" height="220" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+        </div>
+
+        <div class="card">
+          <h3>Getting There</h3>
+          <ul>
+            <li>Nearest airport: <span contenteditable="true">Airport (CODE)</span></li>
+            <li>Railway station: <span contenteditable="true">Station Name</span></li>
+            <li>Local transport: <span contenteditable="true">Taxi / Rideshare / Metro</span></li>
+          </ul>
+          <p class="note">Add pickup timings or shuttle details here if any.</p>
+        </div>
+
+        <div class="card">
+          <h3>Stay Options</h3>
+          <ul>
+            <li><span contenteditable="true">Hotel A</span> — 2 km — <a href="#" contenteditable="true">website</a></li>
+            <li><span contenteditable="true">Hotel B</span> — 3 km — <a href="#" contenteditable="true">website</a></li>
+            <li><span contenteditable="true">Guesthouse C</span> — 1 km — <a href="#" contenteditable="true">website</a></li>
+          </ul>
+          <p class="note">Block dates &amp; discount code (if any) can go here.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1rem">
+        <h3>Local Notes</h3>
+        <ul>
+          <li>Expected weather: <span contenteditable="true">Warm days, cool evenings</span></li>
+          <li>Suggested attire: <span contenteditable="true">Light fabrics, comfortable footwear</span></li>
+          <li>Culture &amp; etiquette: <span contenteditable="true">Temple/mandap etiquette notes etc.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== MORE DETAILS ======================= -->
+  <section id="more">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>More Details</h2>
+          <p class="lead">FAQs, contacts, gifts &amp; anything else.</p>
+        </div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>FAQ</h3>
+          <p><strong>Can I bring a plus‑one?</strong><br><span contenteditable="true">Please check your invitation — we have limited seating.</span></p>
+          <p><strong>Kids welcome?</strong><br><span contenteditable="true">We love kids! Kindly ensure supervision near the mandap.</span></p>
+          <p><strong>Dress codes?</strong><br><span contenteditable="true">See “Details of Functions” above for each event.</span></p>
+        </div>
+        <div class="card">
+          <h3>Contact</h3>
+          <p>For any help, reach out to:</p>
+          <ul>
+            <li>Bride/Groom: <a href="mailto:hello@aishwaryamalte.com" contenteditable="true">hello@aishwaryamalte.com</a></li>
+            <li>Coordinator: <span contenteditable="true">Name — +91‑XXXX‑XXXXXX</span></li>
+          </ul>
+          <p class="note">You can also add Instagram links or a WhatsApp channel here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap">
+      <div>© <span id="y"></span> Aishwarya &amp; Malte</div>
+      <div class="note">Made with love in sage &amp; cream ✨</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    function toggleMenu(close){
+      const m = document.getElementById('menuMobile');
+      const isHidden = m.hasAttribute('hidden');
+      if(close){ m.setAttribute('hidden',''); return; }
+      if(isHidden){ m.removeAttribute('hidden'); } else { m.setAttribute('hidden',''); }
+    }
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
