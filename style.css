@@ -1,8 +1,121 @@
-/* style.css — placeholder for Aishwarya & Malte wedding site */
-body { font-family: Inter, sans-serif; margin: 0; background: #faf7f2; color: #1c2420; }
-h1,h2,h3 { font-family: 'Playfair Display', serif; color: #2f3c2f; }
-.wrap { width: min(1100px, 92vw); margin-inline: auto; }
-.nav { background: rgba(250,247,242,.9); position: sticky; top: 0; }
-.menu a { padding: .5rem 1rem; color: #2f3c2f; text-decoration: none; }
-.menu a:hover { background: #f2eee8; }
-footer { background: #f2eee8; padding: 1rem 0; text-align: center; color: #5b645e; }
+
+:root{
+  --sage-900:#2f3c2f; /* dark sage text */
+  --sage-700:#516a51; /* headings / accents */
+  --sage-500:#7f9b7f; /* buttons / highlights */
+  --sage-300:#a9bea9; /* subtle accents */
+  --cream-50:#fffefb; /* base background */
+  --cream-100:#faf7f2; /* sections */
+  --cream-200:#f2eee8; /* cards */
+  --ink:#1c2420;       /* body text */
+  --muted:#5b645e;     /* muted text */
+  --shadow: 0 10px 25px rgba(0,0,0,.08);
+  --radius: 18px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--ink); background:var(--cream-50); line-height:1.6;
+}
+h1,h2,h3,h4{font-family:"Playfair Display", Georgia, serif; color:var(--sage-900); line-height:1.25}
+h1{font-size:clamp(2rem,4vw,3rem)}
+h2{font-size:clamp(1.6rem,3vw,2.2rem); margin:0 0 .25rem}
+p{margin:.5rem 0 1rem}
+a{color:var(--sage-700); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Container */
+.wrap{width:min(1100px, 92vw); margin-inline:auto}
+
+/* Nav */
+.nav{
+  position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.3) blur(6px);
+  background:rgba(250,247,242,.85); border-bottom:1px solid var(--cream-200);
+}
+.nav-inner{display:flex; align-items:center; justify-content:space-between; padding:.8rem 1rem}
+.brand{display:flex; align-items:center; gap:.7rem; font-weight:700; letter-spacing:.4px}
+.brand .logo{width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--sage-500), var(--sage-300)); display:grid; place-items:center; color:white; font-weight:700}
+.menu{display:flex; gap:1rem; align-items:center}
+.menu a{padding:.5rem .7rem; border-radius:10px; font-weight:600; color:var(--sage-900)}
+.menu a:hover{background:var(--cream-200)}
+.menu-toggle{display:none; border:0; background:transparent; font-size:1.2rem}
+
+@media (max-width: 860px){
+  .menu{display:none}
+  .menu-toggle{display:block}
+  .menu.mobile{display:grid; gap:.4rem; padding:0 1rem 1rem}
+  .menu.mobile a{background:var(--cream-200)}
+}
+
+/* Hero */
+.hero{
+  position:relative; min-height:70svh; display:grid; place-items:center; text-align:center; color:white;
+  background:#2a3a2a; /* fallback */
+  isolation:isolate;
+}
+.hero::before{
+  /* ======== Replace this image with your own banner ========
+     Put your file at /images/banner.jpg and it will load. */
+  content:""; position:absolute; inset:0;
+  background: url('./images/banner.jpg') center/cover no-repeat;
+  opacity:.92; z-index:-2;
+}
+.hero::after{
+  content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(33,45,33,.2), rgba(33,45,33,.55)); z-index:-1
+}
+.hero .card{
+  background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.35); border-radius:var(--radius);
+  padding:clamp(1rem, 3vw, 2rem); box-shadow:var(--shadow); backdrop-filter: blur(6px);
+}
+.names{font-size:clamp(2rem,5vw,3.2rem); font-weight:700; letter-spacing:.6px}
+.date{font-family:"Playfair Display", serif; font-size:clamp(1rem,2.2vw,1.3rem)}
+.cta{margin-top:1rem; display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap}
+.btn{display:inline-block; padding:.7rem 1rem; border-radius:999px; font-weight:700; border:1px solid transparent}
+.btn.primary{background:var(--cream-50); color:var(--sage-900)}
+.btn.ghost{background:transparent; color:white; border-color:rgba(255,255,255,.6)}
+
+/* Sections */
+section{padding: clamp(2rem, 6vw, 4rem) 0; background:var(--cream-50)}
+section.alt{background:var(--cream-100)}
+.section-head{display:flex; align-items:end; justify-content:space-between; gap:1rem; margin-bottom:1.2rem}
+.lead{color:var(--muted)}
+
+/* Cards & Grids */
+.grid{display:grid; gap:1rem}
+.grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+.grid.cols-2{grid-template-columns: repeat(2, 1fr)}
+.grid.cols-4{grid-template-columns: repeat(4, 1fr)}
+@media (max-width: 900px){
+  .grid.cols-4{grid-template-columns: repeat(3, 1fr)}
+  .grid.cols-3{grid-template-columns: repeat(2, 1fr)}
+}
+@media (max-width: 640px){
+  .grid.cols-4,.grid.cols-3,.grid.cols-2{grid-template-columns: 1fr}
+}
+.card{
+  background:var(--cream-100); border:1px solid var(--cream-200); border-radius:var(--radius); padding:1rem; box-shadow:var(--shadow)
+}
+
+/* Itinerary */
+.timeline{position:relative; margin:1rem 0}
+.timeline::before{content:""; position:absolute; left:12px; top:0; bottom:0; width:2px; background:var(--sage-300)}
+.slot{position:relative; padding-left:2.6rem; margin:1.1rem 0}
+.dot{position:absolute; left:6px; top:.3rem; width:14px; height:14px; border-radius:50%; background:var(--sage-500); box-shadow:0 0 0 3px var(--cream-50)}
+.slot h3{margin:0; font-size:1.05rem}
+.meta{color:var(--muted); font-size:.95rem}
+
+/* Gallery */
+.gallery{display:grid; grid-template-columns: repeat(3, 1fr); gap:.7rem}
+.gallery img{width:100%; aspect-ratio: 1/1; object-fit:cover; border-radius:12px; border:1px solid var(--cream-200)}
+@media (max-width:800px){.gallery{grid-template-columns: repeat(2, 1fr)}}
+@media (max-width:520px){.gallery{grid-template-columns: 1fr}}
+
+/* Footer */
+footer{background:var(--cream-100); border-top:1px solid var(--cream-200); padding:1.2rem 0; color:var(--muted)}
+
+/* Helpers */
+.chip{display:inline-block; padding:.25rem .6rem; border-radius:999px; font-size:.85rem; background:var(--cream-200); color:var(--sage-900); border:1px solid var(--cream-200)}
+.note{font-size:.95rem; color:var(--muted)}
+.spacer{height:1.2rem}
