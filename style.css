@@ -135,3 +135,9 @@ footer{background:var(--cream-100); border-top:1px solid var(--cream-200); paddi
   }
 }
 
+.brand .logo-img {
+  margin-right: 0.5rem;  /* spacing between logo and text */
+  vertical-align: middle;
+}
+
+
