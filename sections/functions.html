@@ -9,87 +9,46 @@
 
     <div class="grid cols-2">
 
-      <!-- Haldi Ceremony -->
-      <div class="card function-card" onclick="openFunction('haldi')">
+      <!-- Haldi -->
+      <div class="card function-card">
         <h3>Haldi Ceremony</h3>
         <p class="note">Dress code: Yellow &amp; White 🌼</p>
-        <p class="summary">A joyful pre-wedding ritual with turmeric and laughter. Click to read more.</p>
+        <p class="summary">
+          A joyful pre-wedding ritual with turmeric and laughter. 
+          <a href="#haldi" class="read-more">Click to read more.</a>
+        </p>
       </div>
 
       <!-- Shrimanti Pooja -->
-      <div class="card function-card" onclick="openFunction('pooja')">
+      <div class="card function-card">
         <h3>Shrimanti Pooja</h3>
-        <p class="note">Dress code: Traditional / Feel free to represent your own traditional wear here</p>
-        <p class="summary">An auspicious ceremony invoking blessings for the couple. Click to read more.</p>
+        <p class="note">Dress code: Traditional / Represent your own cultural attire</p>
+        <p class="summary">
+          A sacred ceremony welcoming both families before the wedding. 
+          <a href="#shrimanti" class="read-more">Click to read more.</a>
+        </p>
       </div>
 
-      <!-- Wedding Ceremony -->
-      <div class="card function-card" onclick="openFunction('wedding')">
+      <!-- Wedding -->
+      <div class="card function-card">
         <h3>Wedding Ceremony</h3>
         <p class="note">Dress code: Formal / Traditional</p>
-        <p class="summary">Sacred vows, rituals &amp; the union of two families. Click to read more.</p>
+        <p class="summary">
+          Sacred vows, rituals &amp; the union of two families. 
+          <a href="#wedding" class="read-more">Click to read more.</a>
+        </p>
       </div>
 
-      <!-- Reception Party -->
-      <div class="card function-card" onclick="openFunction('reception')">
+      <!-- Reception -->
+      <div class="card function-card">
         <h3>Reception Party</h3>
         <p class="note">Dress code: Black tie or Indian formal ✨</p>
-        <p class="summary">An evening of music, dance &amp; celebration. Click to read more.</p>
+        <p class="summary">
+          An evening of music, dance &amp; celebration. 
+          <a href="#reception" class="read-more">Click to read more.</a>
+        </p>
       </div>
 
     </div>
   </div>
 </section>
-
-<!-- ========== MODALS (hidden by default) ========== -->
-
-<div id="modal-overlay" class="modal-overlay" hidden></div>
-
-<!-- Haldi Modal -->
-<div id="modal-haldi" class="modal" hidden>
-  <div class="modal-content">
-    <button class="close" onclick="closeModal()">×</button>
-    <h2>Haldi Ceremony</h2>
-    <p>The Haldi Ceremony marks the beginning of our wedding festivities — a tradition full of joy, laughter, and color. Friends and family apply a paste of turmeric, sandalwood, and rose water to the bride and groom as a symbol of blessing, purification, and good fortune. Expect music, laughter, and splashes of yellow!</p>
-  </div>
-</div>
-
-<!-- Pooja Modal -->
-<div id="modal-pooja" class="modal" hidden>
-  <div class="modal-content">
-    <button class="close" onclick="closeModal()">×</button>
-    <h2>Shrimanti Pooja</h2>
-    <p>The Shrimanti Pooja is a sacred ceremony invoking divine blessings for peace, harmony, and prosperity. Close relatives gather for traditional prayers and offerings, led by family priests. The atmosphere is serene and spiritual — a perfect pause before the celebrations that follow.</p>
-  </div>
-</div>
-
-<!-- Wedding Modal -->
-<div id="modal-wedding" class="modal" hidden>
-  <div class="modal-content">
-    <button class="close" onclick="closeModal()">×</button>
-    <h2>Wedding Ceremony</h2>
-    <p>The Wedding Ceremony — our main celebration of love and tradition. The rituals include Antarpat, Varmala exchange, and the sacred Pheras around the holy fire, symbolizing the seven vows of marriage. This is followed by blessings and a joyful feast with family and friends.</p>
-  </div>
-</div>
-
-<!-- Reception Modal -->
-<div id="modal-reception" class="modal" hidden>
-  <div class="modal-content">
-    <button class="close" onclick="closeModal()">×</button>
-    <h2>Reception Party</h2>
-    <p>The Reception Party in New Delhi will be an evening to remember — elegant decor, live music, and a grand dinner as we celebrate with extended family and friends. Come ready to dance, toast, and share laughter as we begin this new chapter together!</p>
-  </div>
-</div>
-
-<script>
-  // open modal
-  function openFunction(id) {
-    document.getElementById("modal-overlay").removeAttribute("hidden");
-    document.getElementById("modal-" + id).removeAttribute("hidden");
-  }
-  // close modal
-  function closeModal() {
-    document.getElementById("modal-overlay").setAttribute("hidden", "");
-    document.querySelectorAll(".modal").forEach(m => m.setAttribute("hidden", ""));
-  }
-</script>
