@@ -276,10 +276,24 @@ footer{
 }
 
 .timeline.scrollable {
-  max-height: 300px;  /* adjust this value if you want more or less height */
+  max-height: 300px;
   overflow-y: auto;
+  padding-left: 1.5rem;
   padding-right: 0.5rem;
+  position: relative;
 }
+
+.timeline.scrollable::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--sage-300);
+  z-index: 0;
+}
+
 .timeline.scrollable::-webkit-scrollbar {
   width: 6px;
 }
@@ -350,5 +364,3 @@ section .card p {
 section .card h3 {
   margin-top: 1.5rem;
 }
-
-
