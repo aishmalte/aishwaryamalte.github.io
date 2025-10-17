@@ -288,3 +288,56 @@ footer{
   border-radius: 6px;
 }
 
+/* Function modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 80;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--cream-50);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 600px;
+  width: 90%;
+  z-index: 100;
+  padding: 1.5rem;
+  animation: fadeIn .25s ease-in-out;
+}
+
+.modal-content {
+  position: relative;
+}
+
+.modal .close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.6rem;
+  font-size: 1.5rem;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translate(-50%, -48%);}
+  to {opacity: 1; transform: translate(-50%, -50%);}
+}
+
+/* Subtle hover style for cards */
+.function-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.function-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
