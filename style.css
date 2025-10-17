@@ -140,4 +140,24 @@ footer{background:var(--cream-100); border-top:1px solid var(--cream-200); paddi
   vertical-align: middle;
 }
 
+/* --- Navbar logo image --- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.brand .logo-img {
+  height: 38px;           /* keeps it small in navbar */
+  width: auto;
+  object-fit: contain;
+  border-radius: 6px;     /* optional, soft corners */
+  display: inline-block;
+}
+
+@media (max-width: 860px) {
+  .brand .logo-img {
+    height: 32px;
+  }
+}
 
