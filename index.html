@@ -66,7 +66,7 @@
   </footer>
 
   <script>
-    // Mobile menu toggle
+    // --- Mobile menu toggle ---
     function toggleMenu(close){
       const m = document.getElementById('menuMobile');
       const isHidden = m.hasAttribute('hidden');
@@ -74,19 +74,21 @@
       if(isHidden){ m.removeAttribute('hidden'); } else { m.setAttribute('hidden',''); }
     }
 
-    // Dynamic section loader
+    // --- Dynamic section loader ---
     async function loadSection(section) {
       try {
         const res = await fetch(`./sections/${section}.html`, {cache: 'no-cache'});
+        if (!res.ok) throw new Error('Not found');
         const html = await res.text();
         document.getElementById("content").innerHTML = html;
         window.scrollTo({ top: document.querySelector('nav').offsetHeight, behavior: "smooth" });
       } catch (e) {
-        document.getElementById("content").innerHTML = `<section class="wrap"><p class="note">Could not load the section <code>${section}</code>. Make sure <code>sections/${section}.html</code> exists.</p></section>`;
+        document.getElementById("content").innerHTML =
+          `<section class="wrap"><p class="note">Could not load the section <code>${section}</code>. Make sure <code>sections/${section}.html</code> exists.</p></section>`;
       }
     }
 
-    // Handle desktop nav clicks
+    // --- Handle desktop nav clicks ---
     document.querySelectorAll("#menu a").forEach(a => {
       a.addEventListener("click", e => {
         e.preventDefault();
@@ -95,10 +97,20 @@
       });
     });
 
-    // Year
+    // --- Handle dynamic "Click to read more" links ---
+    document.addEventListener("click", function(e) {
+      const link = e.target.closest("a.read-more");
+      if (link) {
+        e.preventDefault();
+        const id = link.getAttribute("href").replace("#", "");
+        loadSection(id);
+      }
+    });
+
+    // --- Year ---
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Default load
+    // --- Default load ---
     loadSection("itinerary");
   </script>
 </body>
