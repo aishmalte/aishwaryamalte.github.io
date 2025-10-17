@@ -1,0 +1,8 @@
+/* style.css — placeholder for Aishwarya & Malte wedding site */
+body { font-family: Inter, sans-serif; margin: 0; background: #faf7f2; color: #1c2420; }
+h1,h2,h3 { font-family: 'Playfair Display', serif; color: #2f3c2f; }
+.wrap { width: min(1100px, 92vw); margin-inline: auto; }
+.nav { background: rgba(250,247,242,.9); position: sticky; top: 0; }
+.menu a { padding: .5rem 1rem; color: #2f3c2f; text-decoration: none; }
+.menu a:hover { background: #f2eee8; }
+footer { background: #f2eee8; padding: 1rem 0; text-align: center; color: #5b645e; }
