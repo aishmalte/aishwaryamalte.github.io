@@ -4,54 +4,102 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aishwarya & Malte — Wedding</title>
+  <meta name="description" content="Wedding website for Aishwarya & Malte — itinerary, functions, gallery, RSVP, travel & more details." />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <!-- ====================== NAV ======================= -->
   <nav class="nav">
     <div class="wrap nav-inner">
-      <div class="brand"><strong>AM</strong> &nbsp; Aishwarya & Malte</div>
-      <div class="menu">
-        <a href="#itinerary">Itinerary</a>
-        <a href="#functions">Functions</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#rsvp">RSVP</a>
-        <a href="#travel">Travel</a>
-        <a href="#more">More</a>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">AM</div>
+        <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
       </div>
+      <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+      <div id="menu" class="menu" role="navigation" aria-label="Main">
+        <a href="#itinerary">Itinerary</a>
+        <a href="#functions">Details of Functions</a>
+        <a href="#gallery">Photo Gallery</a>
+        <a href="#rsvp">RSVP</a>
+        <a href="#travel">Travel Details</a>
+        <a href="#more">More Details</a>
+      </div>
+    </div>
+    <div id="menuMobile" class="menu mobile wrap" hidden>
+      <a href="#itinerary" onclick="toggleMenu(true)">Itinerary</a>
+      <a href="#functions" onclick="toggleMenu(true)">Details of Functions</a>
+      <a href="#gallery" onclick="toggleMenu(true)">Photo Gallery</a>
+      <a href="#rsvp" onclick="toggleMenu(true)">RSVP</a>
+      <a href="#travel" onclick="toggleMenu(true)">Travel Details</a>
+      <a href="#more" onclick="toggleMenu(true)">More Details</a>
     </div>
   </nav>
 
-  <header class="hero wrap" style="padding:3rem 0;text-align:center">
-    <h1>Aishwarya & Malte</h1>
-    <p>Wedding Celebrations — <span contenteditable="true">April 2026</span></p>
+  <!-- ====================== HERO ======================= -->
+  <header class="hero" id="home">
+    <div class="wrap">
+      <div class="card">
+        <div class="chip">You're invited</div>
+        <h1 class="names">Aishwarya &amp; Malte</h1>
+        <p class="date">Wedding Celebrations — <span contenteditable="true">April 2026</span></p>
+        <div class="cta">
+          <a class="btn primary" href="#rsvp">RSVP</a>
+          <a class="btn ghost" href="#itinerary">View Itinerary</a>
+        </div>
+        <p class="note" style="margin-top:.8rem">Tip: Replace <code>/images/banner.jpg</code> with your banner photo for the top section.</p>
+      </div>
+    </div>
   </header>
 
-  <main id="content" class="wrap">
-    <p>Loading content...</p>
-  </main>
+  <!-- ====================== DYNAMIC CONTENT MOUNT ======================= -->
+  <main id="content"></main>
 
   <footer>
-    © <span id="y"></span> Aishwarya & Malte — Made with love in sage & cream ✨
+    <div class="wrap" style="display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap">
+      <div>© <span id="y"></span> Aishwarya &amp; Malte</div>
+      <div class="note">Made with love in sage &amp; cream ✨</div>
+    </div>
   </footer>
 
   <script>
+    // Mobile menu toggle
+    function toggleMenu(close){
+      const m = document.getElementById('menuMobile');
+      const isHidden = m.hasAttribute('hidden');
+      if(close){ m.setAttribute('hidden',''); return; }
+      if(isHidden){ m.removeAttribute('hidden'); } else { m.setAttribute('hidden',''); }
+    }
+
+    // Dynamic section loader to keep modular structure but same visuals
     async function loadSection(section) {
-      const res = await fetch(`./sections/${section}.html`);
-      const html = await res.text();
-      document.getElementById("content").innerHTML = html;
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      try {
+        const res = await fetch(`./sections/${section}.html`, {cache: 'no-cache'});
+        const html = await res.text();
+        document.getElementById("content").innerHTML = html;
+        window.scrollTo({ top: document.querySelector('nav').offsetHeight, behavior: "smooth" });
+      } catch (e) {
+        document.getElementById("content").innerHTML = `<section class="wrap"><p class="note">Could not load the section <code>${section}</code>. Make sure <code>sections/${section}.html</code> exists.</p></section>`;
+      }
     }
-    function initNav() {
-      document.querySelectorAll(".menu a").forEach(a => {
-        a.addEventListener("click", e => {
-          e.preventDefault();
-          const section = a.getAttribute("href").replace("#","");
-          loadSection(section);
-        });
+
+    // Handle desktop nav clicks
+    document.querySelectorAll("#menu a").forEach(a => {
+      a.addEventListener("click", e => {
+        e.preventDefault();
+        const id = a.getAttribute("href").replace("#", "");
+        loadSection(id);
       });
-    }
-    document.getElementById("y").textContent = new Date().getFullYear();
-    initNav();
+    });
+    // Handle mobile nav clicks are inline via onclick
+
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Default load
     loadSection("itinerary");
   </script>
 </body>
