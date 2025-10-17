@@ -9,15 +9,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=3">
 </head>
 <body>
   <!-- ====================== NAV ======================= -->
   <nav class="nav">
     <div class="wrap nav-inner">
       <div class="brand">
-      <img class="logo-img" src="./images/logo.png" alt="Aishwarya & Malte logo">
-      <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
+        <img class="logo-img" src="./images/logo.png" alt="Aishwarya & Malte logo">
+        <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
       </div>
       <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
       <div id="menu" class="menu" role="navigation" aria-label="Main">
@@ -45,7 +45,7 @@
       <div class="card">
         <div class="chip">You're invited</div>
         <h1 class="names">Aishwarya &amp; Malte</h1>
-        <p class="date">Wedding Celebrations — <span contenteditable="true">April 2026</span></p>
+        <p class="date">Wedding Celebrations — <span contenteditable="true">24 – 26 February 2026</span></p>
         <div class="cta">
           <a class="btn primary" href="#rsvp">RSVP</a>
           <a class="btn ghost" href="#itinerary">View Itinerary</a>
@@ -61,7 +61,7 @@
   <footer>
     <div class="wrap" style="display:flex; justify-content:space-between; gap:1rem; align-items:center; flex-wrap:wrap">
       <div>© <span id="y"></span> Aishwarya &amp; Malte</div>
-      <div class="note">Made with love in sage &amp; cream ✨</div>
+      <div class="note">With love from Girdhar &amp; Scherbarth family ✨</div>
     </div>
   </footer>
 
@@ -74,7 +74,7 @@
       if(isHidden){ m.removeAttribute('hidden'); } else { m.setAttribute('hidden',''); }
     }
 
-    // Dynamic section loader to keep modular structure but same visuals
+    // Dynamic section loader
     async function loadSection(section) {
       try {
         const res = await fetch(`./sections/${section}.html`, {cache: 'no-cache'});
@@ -94,7 +94,6 @@
         loadSection(id);
       });
     });
-    // Handle mobile nav clicks are inline via onclick
 
     // Year
     document.getElementById('y').textContent = new Date().getFullYear();
