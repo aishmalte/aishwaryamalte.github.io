@@ -15,10 +15,10 @@
   <!-- ====================== NAV ======================= -->
   <nav class="nav">
     <div class="wrap nav-inner">
-      <div class="brand">
-        <img class="logo-img" src="./images/logo.png" alt="Aishwarya & Malte logo">
-        <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
-      </div>
+    <a href="#home" class="brand" onclick="goHome(event)">
+      <img class="logo-img" src="./images/logo.png" alt="Aishwarya & Malte logo">
+      <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
+    </a>
 
       <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
 
@@ -117,6 +117,14 @@ function toggleMenu(close) {
         const html = await res.text();
         document.getElementById("content").innerHTML = html;
 
+    // --- Go back to Home section (works on both desktop + mobile) ---
+    function goHome(event) {
+      event.preventDefault();           // stop link default behavior
+      loadSection('');                  // load the home section again
+      toggleMenu(true);                 // close mobile menu if open
+      window.scrollTo({ top: 0, behavior: "smooth" }); // scroll to top smoothly
+  }
+    
         // --- Change hero overlay behavior ---
         const hero = document.querySelector(".hero");
         const intro = document.getElementById("intro");
