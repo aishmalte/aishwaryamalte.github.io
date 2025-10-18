@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=6">
+  <link rel="stylesheet" href="./style.css?v=5">
 </head>
 <body>
   <!-- ====================== NAV ======================= -->
@@ -19,7 +20,10 @@
         <img class="logo-img" src="./images/logo.png" alt="Aishwarya & Malte logo">
         <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
       </div>
+    
       
+      <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+
       <!-- Desktop Menu -->
       <div id="menu" class="menu" role="navigation" aria-label="Main">
         <a href="#itinerary">Itinerary</a>
@@ -28,13 +32,8 @@
         <a href="#travel">Travel Details</a>
         <a href="#gallery">Photo Gallery</a>
         <a href="#more">More Details</a>
+        <div id="google_translate_element" style="margin-left:auto; margin-right:1rem;"></div>
       </div>
-
-      <!-- Language toggle button -->
-      <button id="lang-toggle" class="lang-btn" aria-label="Toggle language">DE</button>
-
-      <!-- Hamburger for mobile -->
-      <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
     </div>
 
     <!-- Mobile Menu -->
@@ -134,38 +133,42 @@
 
     // --- Default load (Home page behavior) ---
     loadSection("");
-
-    // --- Simple Language Toggle ---
-    let currentLang = 'en';
-    const langBtn = document.getElementById('lang-toggle');
-
-    langBtn.addEventListener('click', () => {
-      currentLang = currentLang === 'en' ? 'de' : 'en';
-      langBtn.textContent = currentLang === 'en' ? 'DE' : 'EN';
-      translatePage(currentLang);
-    });
-
-    function translatePage(lang) {
-      if (!window.google || !window.google.translate) return;
-      const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = lang;
-        select.dispatchEvent(new Event('change'));
-      }
-    }
-
-    // --- Google Translate hidden loader ---
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,de',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'hidden_translate_container');
-    }
   </script>
 
-  <!-- Hidden translate container -->
-  <div id="hidden_translate_container" style="display:none;"></div>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- Language Toggle Button -->
+<button id="lang-toggle" class="lang-btn" aria-label="Toggle language">DE</button>
+
+<script>
+  // ---- Simple Language Toggle ----
+  let currentLang = 'en';
+  const langBtn = document.getElementById('lang-toggle');
+
+  langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'de' : 'en';
+    langBtn.textContent = currentLang === 'en' ? 'DE' : 'EN';
+    translatePage(currentLang);
+  });
+
+  function translatePage(lang) {
+    if (!window.google || !window.google.translate) return;
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event('change'));
+    }
+  }
+
+  // Load Google Translate silently (no dropdown)
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,de',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'hidden_translate_container');
+  }
+</script>
+<div id="hidden_translate_container" style="display:none;"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
