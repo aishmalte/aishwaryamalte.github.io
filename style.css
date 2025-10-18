@@ -126,7 +126,8 @@ a:hover { text-decoration: underline }
   .menu-toggle { display: block; }
 }
 
-/* ================= HERO (banner only) ================= */
+/* ================= HERO ================= */
+/* --- Default (Home Page Banner) --- */
 .hero {
   position: relative;
   height: 70vh;
@@ -140,6 +141,22 @@ a:hover { text-decoration: underline }
   inset: 0;
   background: linear-gradient(to bottom, rgba(33,45,33,0.2), rgba(33,45,33,0.6));
   z-index: 0;
+}
+
+/* --- Overlay card for other pages --- */
+.hero.with-card {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+}
+.hero.with-card .card {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: var(--radius);
+  padding: clamp(1rem, 3vw, 2rem);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
 }
 
 /* ================= INTRO SECTION ================= */
