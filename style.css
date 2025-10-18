@@ -48,7 +48,10 @@ a:hover { text-decoration: underline }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: .8rem 1rem;
+  padding: 0.8rem 2rem; /* slightly wider internal padding */
+  max-width: 1400px;    /* allow more horizontal room */
+  margin: 0 auto;
+  width: 98vw;          /* expand header area width */
 }
 .brand {
   display: flex;
