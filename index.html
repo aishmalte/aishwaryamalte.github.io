@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aishwarya & Malte — Wedding</title>
   <meta name="description" content="Wedding website for Aishwarya & Malte — itinerary, functions, gallery, RSVP, travel & more details." />
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=5">
+  <link rel="stylesheet" href="./style.css?v=6">
 </head>
+
 <body>
   <!-- ====================== NAV ======================= -->
   <nav class="nav">
@@ -19,11 +19,9 @@
         <img class="logo-img" src="./images/logo.png" alt="Aishwarya & Malte logo">
         <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
       </div>
-    
-      
+
       <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
 
-      <!-- Desktop Menu -->
       <div id="menu" class="menu" role="navigation" aria-label="Main">
         <a href="#itinerary">Itinerary</a>
         <a href="#rsvp">RSVP</a>
@@ -31,25 +29,17 @@
         <a href="#travel">Travel Details</a>
         <a href="#gallery">Photo Gallery</a>
         <a href="#more">More Details</a>
-        <div id="google_translate_element" style="margin-left:auto; margin-right:1rem;"></div>
       </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="menuMobile" class="menu mobile wrap" hidden>
-      <a href="#itinerary" onclick="toggleMenu(true)">Itinerary</a>
-      <a href="#rsvp" onclick="toggleMenu(true)">RSVP</a>
-      <a href="#functions" onclick="toggleMenu(true)">Details of Functions</a>
-      <a href="#travel" onclick="toggleMenu(true)">Travel Details</a>
-      <a href="#gallery" onclick="toggleMenu(true)">Photo Gallery</a>
-      <a href="#more" onclick="toggleMenu(true)">More Details</a>
     </div>
   </nav>
 
-  <!-- ====================== HERO (banner only) ======================= -->
+  <!-- Language Toggle Button -->
+  <button id="lang-toggle" class="lang-btn" aria-label="Toggle language">DE</button>
+
+  <!-- ====================== HERO ======================= -->
   <header class="hero" id="home"></header>
 
-  <!-- ====================== INTRO SECTION (Home only) ======================= -->
+  <!-- ====================== INTRO ======================= -->
   <section class="intro-section" id="intro">
     <div class="wrap text-center">
       <div class="chip">You're invited!</div>
@@ -62,7 +52,7 @@
     </div>
   </section>
 
-  <!-- ====================== DYNAMIC CONTENT ======================= -->
+  <!-- ====================== CONTENT ======================= -->
   <main id="content"></main>
 
   <footer>
@@ -72,8 +62,8 @@
     </div>
   </footer>
 
+  <!-- ====================== SCRIPTS ======================= -->
   <script>
-    // --- Mobile menu toggle ---
     function toggleMenu(close){
       const m = document.getElementById('menuMobile');
       const isHidden = m.hasAttribute('hidden');
@@ -81,18 +71,14 @@
       if(isHidden){ m.removeAttribute('hidden'); } else { m.setAttribute('hidden',''); }
     }
 
-    // --- Dynamic section loader ---
     async function loadSection(section) {
       try {
         const res = await fetch(`./sections/${section}.html`, {cache: 'no-cache'});
         if (!res.ok) throw new Error('Not found');
         const html = await res.text();
         document.getElementById("content").innerHTML = html;
-
-        // --- Change hero overlay behavior ---
         const hero = document.querySelector(".hero");
         const intro = document.getElementById("intro");
-
         if (section === "home" || section === "") {
           hero.classList.remove("with-card");
           intro.style.display = "block";
@@ -100,15 +86,13 @@
           hero.classList.add("with-card");
           intro.style.display = "none";
         }
-
         window.scrollTo({ top: document.querySelector('nav').offsetHeight, behavior: "smooth" });
       } catch (e) {
         document.getElementById("content").innerHTML =
-          `<section class="wrap"><p class="note">Check out all the tabs and let us know if you have questions! </p></section>`;
+          `<section class="wrap"><p class="note">Check out all the tabs and let us know if you have questions!</p></section>`;
       }
     }
 
-    // --- Handle desktop nav clicks ---
     document.querySelectorAll("#menu a").forEach(a => {
       a.addEventListener("click", e => {
         e.preventDefault();
@@ -117,7 +101,6 @@
       });
     });
 
-    // --- Handle dynamic read-more links ---
     document.addEventListener("click", function(e) {
       const link = e.target.closest("a.read-more");
       if (link) {
@@ -127,47 +110,37 @@
       }
     });
 
-    // --- Year ---
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // --- Default load (Home page behavior) ---
     loadSection("");
   </script>
 
-<!-- Language Toggle Button -->
-<button id="lang-toggle" class="lang-btn" aria-label="Toggle language">DE</button>
-
-<script>
-  // ---- Simple Language Toggle ----
-  let currentLang = 'en';
-  const langBtn = document.getElementById('lang-toggle');
-
-  langBtn.addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'de' : 'en';
-    langBtn.textContent = currentLang === 'en' ? 'DE' : 'EN';
-    translatePage(currentLang);
-  });
-
-  function translatePage(lang) {
-    if (!window.google || !window.google.translate) return;
-    const select = document.querySelector('.goog-te-combo');
-    if (select) {
-      select.value = lang;
-      select.dispatchEvent(new Event('change'));
+  <!-- Google Translate Loader -->
+  <div id="hidden_translate_container" style="display:none;"></div>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,de',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'hidden_translate_container');
     }
-  }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-  // Load Google Translate silently (no dropdown)
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,de',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'hidden_translate_container');
-  }
-</script>
-<div id="hidden_translate_container" style="display:none;"></div>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <!-- Language Switch -->
+  <script>
+    const langBtn = document.getElementById('lang-toggle');
+    let currentLang = 'en';
 
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'en' ? 'de' : 'en';
+      langBtn.textContent = currentLang === 'en' ? 'DE' : 'EN';
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = currentLang;
+        select.dispatchEvent(new Event('change'));
+      }
+    });
+  </script>
 </body>
 </html>
