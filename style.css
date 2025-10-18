@@ -471,3 +471,54 @@ a.read-more:hover {
   display: none !important;
 }
 
+/* ====== GOOGLE TRANSLATE CUSTOM PILL STYLE ====== */
+.translate-pill {
+  margin-left: auto;
+  margin-right: 1rem;
+  transform: scale(0.9);
+  transform-origin: right;
+}
+
+/* Hide all default text & Google branding */
+.goog-logo-link,
+.goog-te-gadget span,
+.goog-te-gadget-simple > img {
+  display: none !important;
+}
+
+/* Make the dropdown look like a pill button */
+.goog-te-gadget-simple {
+  background: var(--sage-500) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 6px 14px !important;
+  font-family: inherit !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  transition: background 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goog-te-gadget-simple:hover {
+  background: var(--sage-700) !important;
+}
+
+/* Force text to just show "EN" instead of "Select Language" */
+.goog-te-gadget-simple::before {
+  content: "EN";
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Make the dropdown arrow visible and aligned */
+.goog-te-gadget-simple::after {
+  content: " ▾";
+  font-size: 0.8rem;
+  color: #fff;
+  margin-left: 3px;
+}
+
