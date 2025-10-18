@@ -135,35 +135,34 @@ function toggleMenu(close) {
         }
 
         window.scrollTo({ top: document.querySelector('nav').offsetHeight, behavior: "smooth" });
+        reattachListenersAfterLoad(); // rebind buttons after new HTML loads
       } catch (e) {
         document.getElementById("content").innerHTML =
           `<section class="wrap"><p class="note">Check out all the tabs and let us know if you have questions! </p></section>`;
       }
     }
 
-// --- Handle both desktop and mobile nav clicks ---
+// --- Handle all navigation clicks (desktop + mobile + home buttons) ---
 function attachNavListeners() {
-  document.querySelectorAll("#menu a, #menuMobile a").forEach(a => {
+  const links = document.querySelectorAll("#menu a, #menuMobile a, .cta a");
+  links.forEach(a => {
     a.addEventListener("click", e => {
       e.preventDefault();
       const id = a.getAttribute("href").replace("#", "");
       loadSection(id);
-      toggleMenu(true); // closes mobile menu after clicking
-    });
-  });
-
-  // Also for CTA buttons on the homepage (like RSVP / Itinerary)
-  document.querySelectorAll(".cta a").forEach(a => {
-    a.addEventListener("click", e => {
-      e.preventDefault();
-      const id = a.getAttribute("href").replace("#", "");
-      loadSection(id);
+      toggleMenu(true);
     });
   });
 }
 
-// Attach once page is ready
+// Call it once on page load
 document.addEventListener("DOMContentLoaded", attachNavListeners);
+
+// Reattach listeners again whenever new content is loaded dynamically
+function reattachListenersAfterLoad() {
+  attachNavListeners();
+}
+
 
     // --- Handle dynamic read-more links ---
     document.addEventListener("click", function(e) {
