@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +19,7 @@
         <img class="logo-img" src="./images/logo.png" alt="Aishwarya & Malte logo">
         <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
       </div>
-    
-      
+
       <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
 
       <!-- Desktop Menu -->
@@ -32,6 +30,7 @@
         <a href="#travel">Travel Details</a>
         <a href="#gallery">Photo Gallery</a>
         <a href="#more">More Details</a>
+        <!-- Desktop language toggle -->
         <button id="lang-toggle" class="lang-btn" aria-label="Toggle language">DE</button>
       </div>
     </div>
@@ -44,6 +43,8 @@
       <a href="#travel" onclick="toggleMenu(true)">Travel Details</a>
       <a href="#gallery" onclick="toggleMenu(true)">Photo Gallery</a>
       <a href="#more" onclick="toggleMenu(true)">More Details</a>
+      <!-- Mobile language toggle -->
+      <button id="lang-toggle-mobile" class="lang-btn" aria-label="Toggle language">DE</button>
     </div>
   </nav>
 
@@ -82,6 +83,22 @@
       if(isHidden){ m.removeAttribute('hidden'); } else { m.setAttribute('hidden',''); }
     }
 
+    // Track current language
+    let currentLang = 'en';
+
+    // Programmatically trigger Google Translate selection
+    function translatePage(lang) {
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = lang;
+        // fire change event so Google Translate runs
+        select.dispatchEvent(new Event('change'));
+      } else {
+        // if the widget isn't ready yet, retry shortly
+        setTimeout(() => translatePage(lang), 400);
+      }
+    }
+
     // --- Dynamic section loader ---
     async function loadSection(section) {
       try {
@@ -100,6 +117,11 @@
         } else {
           hero.classList.add("with-card");
           intro.style.display = "none";
+        }
+
+        // Re-translate newly injected content if DE is active
+        if (currentLang !== 'en') {
+          translatePage(currentLang);
         }
 
         window.scrollTo({ top: document.querySelector('nav').offsetHeight, behavior: "smooth" });
@@ -128,6 +150,28 @@
       }
     });
 
+    // --- Language toggle buttons (desktop + mobile) ---
+    function updateLangButtons() {
+      const label = currentLang === 'en' ? 'DE' : 'EN';
+      const btn1 = document.getElementById('lang-toggle');
+      const btn2 = document.getElementById('lang-toggle-mobile');
+      if (btn1) btn1.textContent = label;
+      if (btn2) btn2.textContent = label;
+    }
+
+    function onLangToggleClick() {
+      currentLang = currentLang === 'en' ? 'de' : 'en';
+      updateLangButtons();
+      translatePage(currentLang);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn1 = document.getElementById('lang-toggle');
+      const btn2 = document.getElementById('lang-toggle-mobile');
+      if (btn1) btn1.addEventListener('click', onLangToggleClick);
+      if (btn2) btn2.addEventListener('click', onLangToggleClick);
+    });
+
     // --- Year ---
     document.getElementById('y').textContent = new Date().getFullYear();
 
@@ -135,46 +179,23 @@
     loadSection("");
   </script>
 
+  <!-- Hidden container for Google Translate widget (no visible dropdown) -->
+  <div id="hidden_translate_container" style="display:none;"></div>
 
-<!-- Language Toggle Button -->
-<button id="lang-toggle" class="lang-btn" aria-label="Toggle language">DE</button>
-
-<script>
-  // ---- Simple Language Toggle ----
-  let currentLang = 'en';
-  const langBtn = document.getElementById('lang-toggle');
-
-  // Function to trigger Google Translate
-  function translatePage(lang) {
-    const select = document.querySelector('.goog-te-combo');
-    if (select) {
-      select.value = lang;
-      select.dispatchEvent(new Event('change'));
-    } else {
-      // Retry until Google Translate is ready
-      setTimeout(() => translatePage(lang), 500);
+  <!-- Google Translate loader -->
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,de',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'hidden_translate_container');
+      // If user reloads while DE was active, keep DE
+      if (currentLang !== 'en') {
+        translatePage(currentLang);
+      }
     }
-  }
-
-  // Handle toggle click
-  langBtn.addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'de' : 'en';
-    langBtn.textContent = currentLang === 'en' ? 'DE' : 'EN';
-    translatePage(currentLang);
-  });
-
-  // Load Google Translate silently (hidden)
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,de',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'hidden_translate_container');
-  }
-</script>
-
-<div id="hidden_translate_container" style="display:none;"></div>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
