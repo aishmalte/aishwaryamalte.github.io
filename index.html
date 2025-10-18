@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=4">
+  <link rel="stylesheet" href="./style.css?v=5">
 </head>
 <body>
   <!-- ====================== NAV ======================= -->
@@ -42,15 +42,15 @@
   <!-- ====================== HERO (banner only) ======================= -->
   <header class="hero" id="home"></header>
 
-  <!-- ====================== INTRO SECTION ======================= -->
-  <section class="intro-section">
+  <!-- ====================== INTRO SECTION (home only) ======================= -->
+  <section class="intro-section home-intro">
     <div class="wrap text-center">
       <div class="chip">You're invited!</div>
       <h1 class="names">Aishwarya &amp; Malte</h1>
-      <p class="date">Wedding Celebrations — <span contenteditable="true">24 – 26 February 2026</span></p>
+      <p class="date">Wedding Celebrations — <span>24<sup>th</sup> – 26<sup>th</sup> February 2026</span></p>
       <div class="cta">
-        <a class="btn primary" href="#rsvp">RSVP</a>
-        <a class="btn ghost" href="#itinerary">View Itinerary</a>
+        <a class="btn primary" href="#" onclick="loadSection('rsvp')">RSVP</a>
+        <a class="btn ghost" href="#" onclick="loadSection('itinerary')">View Itinerary</a>
       </div>
     </div>
   </section>
@@ -82,6 +82,19 @@
         const html = await res.text();
         document.getElementById("content").innerHTML = html;
         window.scrollTo({ top: document.querySelector('nav').offsetHeight, behavior: "smooth" });
+
+        // Switch hero to overlay card for non-home pages
+        const hero = document.querySelector('.hero');
+        const intro = document.querySelector('.intro-section');
+        const withOverlay = ["itinerary", "functions", "gallery", "rsvp", "travel", "more"];
+        if (withOverlay.includes(section)) {
+          hero.classList.add("with-card");
+          intro.style.display = "none";
+        } else {
+          hero.classList.remove("with-card");
+          intro.style.display = "block";
+        }
+
       } catch (e) {
         document.getElementById("content").innerHTML =
           `<section class="wrap"><p class="note">Could not load the section <code>${section}</code>. Make sure <code>sections/${section}.html</code> exists.</p></section>`;
@@ -111,7 +124,7 @@
     document.getElementById('y').textContent = new Date().getFullYear();
 
     // --- Default load ---
-    loadSection("itinerary");
+    loadSection(""); // blank to keep home clean
   </script>
 </body>
 </html>
