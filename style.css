@@ -417,3 +417,21 @@ a.read-more:hover {
   transform: translateY(-2px);
 }
 
+/* ============ GOOGLE TRANSLATE DROPDOWN CLEANUP ============ */
+#google_translate_element {
+  font-size: 0.9rem;
+}
+.goog-te-gadget {
+  font-family: inherit !important;
+}
+.goog-te-combo {
+  border-radius: 8px;
+  padding: 4px 6px;
+  border: 1px solid var(--cream-200);
+  background: var(--cream-100);
+  color: var(--sage-900);
+  font-weight: 600;
+}
+.goog-logo-link, .goog-te-gadget span {
+  display: none !important;
+}
