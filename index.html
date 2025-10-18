@@ -136,27 +136,34 @@
   </script>
 
 
+<!-- Language Toggle Button -->
+<button id="lang-toggle" class="lang-btn" aria-label="Toggle language">DE</button>
+
 <script>
   // ---- Simple Language Toggle ----
   let currentLang = 'en';
   const langBtn = document.getElementById('lang-toggle');
 
+  // Function to trigger Google Translate
+  function translatePage(lang) {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event('change'));
+    } else {
+      // Retry until Google Translate is ready
+      setTimeout(() => translatePage(lang), 500);
+    }
+  }
+
+  // Handle toggle click
   langBtn.addEventListener('click', () => {
     currentLang = currentLang === 'en' ? 'de' : 'en';
     langBtn.textContent = currentLang === 'en' ? 'DE' : 'EN';
     translatePage(currentLang);
   });
 
-  function translatePage(lang) {
-    if (!window.google || !window.google.translate) return;
-    const select = document.querySelector('.goog-te-combo');
-    if (select) {
-      select.value = lang;
-      select.dispatchEvent(new Event('change'));
-    }
-  }
-
-  // Load Google Translate silently (no dropdown)
+  // Load Google Translate silently (hidden)
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
       pageLanguage: 'en',
@@ -165,8 +172,9 @@
     }, 'hidden_translate_container');
   }
 </script>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <div id="hidden_translate_container" style="display:none;"></div>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
