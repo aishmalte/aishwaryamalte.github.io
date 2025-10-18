@@ -19,6 +19,9 @@
         <img class="logo-img" src="./images/logo.png" alt="Aishwarya & Malte logo">
         <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
       </div>
+    
+      <div id="google_translate_element" style="margin-left:auto; margin-right:1rem;"></div>
+      
       <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
 
       <!-- Desktop Menu -->
@@ -130,5 +133,18 @@
     // --- Default load (Home page behavior) ---
     loadSection("");
   </script>
+
+<!-- Google Translate -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,de',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
