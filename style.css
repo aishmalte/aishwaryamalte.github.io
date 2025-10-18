@@ -72,9 +72,22 @@ a:hover { text-decoration: underline }
 /* Desktop menu */
 .menu {
   display: flex;
-  gap: 1rem;
   align-items: center;
+  justify-content: flex-start;
+  gap: 1.4rem;
+  flex-wrap: nowrap; /* keeps everything in one line */
+  overflow: hidden;
+  white-space: nowrap; /* prevents wrapping */
 }
+.menu a {
+  padding: .5rem .7rem;
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--sage-900);
+  text-decoration: none;
+  flex-shrink: 0; /* stops shrinking on small screens */
+}
+.menu a:hover { background: var(--cream-200); }
 .menu a {
   padding: .5rem .7rem;
   border-radius: 10px;
