@@ -42,20 +42,20 @@
   <!-- ====================== HERO (banner only) ======================= -->
   <header class="hero" id="home"></header>
 
-  <!-- ====================== INTRO SECTION (home only) ======================= -->
-  <section class="intro-section home-intro">
+  <!-- ====================== INTRO SECTION (Home only) ======================= -->
+  <section class="intro-section" id="intro">
     <div class="wrap text-center">
       <div class="chip">You're invited!</div>
       <h1 class="names">Aishwarya &amp; Malte</h1>
-      <p class="date">Wedding Celebrations — <span>24<sup>th</sup> – 26<sup>th</sup> February 2026</span></p>
+      <p class="date">Wedding Celebrations — <span contenteditable="true">24 – 26 February 2026</span></p>
       <div class="cta">
-        <a class="btn primary" href="#" onclick="loadSection('rsvp')">RSVP</a>
-        <a class="btn ghost" href="#" onclick="loadSection('itinerary')">View Itinerary</a>
+        <a class="btn primary" href="#rsvp">RSVP</a>
+        <a class="btn ghost" href="#itinerary">View Itinerary</a>
       </div>
     </div>
   </section>
 
-  <!-- ====================== DYNAMIC CONTENT MOUNT ======================= -->
+  <!-- ====================== DYNAMIC CONTENT ======================= -->
   <main id="content"></main>
 
   <footer>
@@ -81,23 +81,23 @@
         if (!res.ok) throw new Error('Not found');
         const html = await res.text();
         document.getElementById("content").innerHTML = html;
-        window.scrollTo({ top: document.querySelector('nav').offsetHeight, behavior: "smooth" });
 
-        // Switch hero to overlay card for non-home pages
-        const hero = document.querySelector('.hero');
-        const intro = document.querySelector('.intro-section');
-        const withOverlay = ["itinerary", "functions", "gallery", "rsvp", "travel", "more"];
-        if (withOverlay.includes(section)) {
-          hero.classList.add("with-card");
-          intro.style.display = "none";
-        } else {
+        // --- Change hero overlay behavior ---
+        const hero = document.querySelector(".hero");
+        const intro = document.getElementById("intro");
+
+        if (section === "home" || section === "") {
           hero.classList.remove("with-card");
           intro.style.display = "block";
+        } else {
+          hero.classList.add("with-card");
+          intro.style.display = "none";
         }
 
+        window.scrollTo({ top: document.querySelector('nav').offsetHeight, behavior: "smooth" });
       } catch (e) {
         document.getElementById("content").innerHTML =
-          `<section class="wrap"><p class="note">Check out all the tabs. <code>${section}</code> Let us know if you have questions!</p></section>`;
+          `<section class="wrap"><p class="note">Could not load the section <code>${section}</code>. Make sure <code>sections/${section}.html</code> exists.</p></section>`;
       }
     }
 
@@ -110,7 +110,7 @@
       });
     });
 
-    // --- Handle dynamic "Click to read more" links ---
+    // --- Handle dynamic read-more links ---
     document.addEventListener("click", function(e) {
       const link = e.target.closest("a.read-more");
       if (link) {
@@ -123,8 +123,8 @@
     // --- Year ---
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // --- Default load ---
-    loadSection(""); // blank to keep home clean
+    // --- Default load (Home page behavior) ---
+    loadSection("");
   </script>
 </body>
 </html>
