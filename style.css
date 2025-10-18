@@ -441,3 +441,33 @@ a.read-more:hover {
   margin-left: auto;
   margin-right: 0.3rem;
 }
+
+/* ============ GOOGLE TRANSLATE DROPDOWN CLEANUP ============ */
+#google_translate_element {
+  margin-left: auto;
+  margin-right: 1.2rem;
+  transform: scale(0.85); /* makes it smaller */
+  transform-origin: right center;
+}
+
+.goog-te-gadget {
+  font-family: inherit !important;
+  background-color: transparent !important;
+  border-radius: 8px;
+}
+
+.goog-te-combo {
+  border-radius: 6px !important;
+  border: 1px solid var(--cream-200) !important;
+  background-color: var(--cream-100) !important; /* matches site background */
+  color: var(--sage-900) !important;
+  padding: 3px 6px !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+
