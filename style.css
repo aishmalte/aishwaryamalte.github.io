@@ -399,3 +399,21 @@ section .card h3 { margin-top: 1.5rem }
 .btn.small:hover {
   background: var(--sage-700);
 }
+
+/* ================= READ MORE BUTTON STYLE ================= */
+a.read-more {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--sage-500);
+  color: white;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+a.read-more:hover {
+  background: var(--sage-700);
+  transform: translateY(-2px);
+}
+
