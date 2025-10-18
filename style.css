@@ -35,13 +35,13 @@ a:hover{text-decoration:underline}
 /* Container */
 .wrap{width:min(1100px, 92vw); margin-inline:auto}
 
-/* Nav */
+/* ================= NAV ================= */
 .nav{
   position:sticky;
   top:0;
   z-index:50;
   backdrop-filter:saturate(1.3) blur(6px);
-  background:rgba(250,247,242,.85);
+  background:rgba(250,247,242,.9);
   border-bottom:1px solid var(--cream-200);
 }
 .nav-inner{
@@ -58,7 +58,7 @@ a:hover{text-decoration:underline}
   letter-spacing:.4px;
 }
 .brand .logo-img{
-  height:38px;
+  height:42px;
   width:auto;
   object-fit:contain;
   border-radius:6px;
@@ -66,9 +66,15 @@ a:hover{text-decoration:underline}
   vertical-align:middle;
 }
 @media (max-width:860px){
-  .brand .logo-img{height:32px;}
+  .brand .logo-img{height:36px;}
 }
-.menu{display:flex; gap:1rem; align-items:center}
+
+/* Desktop menu */
+.menu{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+}
 .menu a{
   padding:.5rem .7rem;
   border-radius:10px;
@@ -76,24 +82,48 @@ a:hover{text-decoration:underline}
   color:var(--sage-900);
 }
 .menu a:hover{background:var(--cream-200)}
+
+/* Hamburger toggle */
 .menu-toggle{
   display:none;
   border:0;
   background:transparent;
-  font-size:1.2rem;
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--sage-900);
+  cursor:pointer;
 }
 
-/* Hide/show logic for menus */
-#menuMobile[hidden] {
-  display: none !important;
+/* Mobile menu dropdown */
+#menuMobile {
+  display:none;
+  background:var(--cream-100);
+  border-bottom:1px solid var(--cream-200);
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
 }
-@media (max-width: 860px) {
-  #menu {
-    display: none;
-  }
-  #menuMobile {
-    display: grid;
-  }
+#menuMobile.show {
+  display:grid;
+  gap:0.6rem;
+  padding:0.8rem 1rem 1.2rem;
+  animation:fadeIn 0.25s ease-in-out;
+}
+#menuMobile a {
+  background:var(--cream-200);
+  padding:0.6rem 0.8rem;
+  border-radius:10px;
+  font-weight:600;
+  color:var(--sage-900);
+  text-align:center;
+}
+#menuMobile a:hover {
+  background:var(--sage-300);
+  color:white;
+}
+
+/* Hide desktop nav on mobile */
+@media (max-width:860px){
+  .menu{display:none;}
+  .menu-toggle{display:block;}
 }
 
 /* Hero */
@@ -199,33 +229,48 @@ section.alt{background:var(--cream-100)}
 }
 
 /* Itinerary */
-.timeline{position:relative; margin:1rem 0}
-.timeline::before{
-  content:"";
-  position:absolute;
-  left:12px;
-  top:0;
-  bottom:0;
-  width:2px;
-  background:var(--sage-300);
+.timeline {
+  position: relative;
+  margin: 1rem 0;
 }
-.slot{
-  position:relative;
-  padding-left:2.6rem;
-  margin:1.1rem 0;
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 13px; /* centered under dots */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--sage-300);
 }
-.dot{
-  position:absolute;
-  left:6px;
-  top:.3rem;
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:var(--sage-500);
-  box-shadow:0 0 0 3px var(--cream-50);
+.slot {
+  position: relative;
+  padding-left: 2.8rem;
+  margin: 1.1rem 0;
 }
-.slot h3{margin:0; font-size:1.05rem}
-.meta{color:var(--muted); font-size:.95rem}
+.dot {
+  position: absolute;
+  left: 7px;
+  top: .3rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--sage-500);
+  box-shadow: 0 0 0 3px var(--cream-50);
+}
+.slot h3 {margin:0; font-size:1.05rem}
+.meta {color:var(--muted); font-size:.95rem}
+
+/* Scrollable fix */
+.timeline.scrollable {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: .5rem;
+}
+.timeline.scrollable::-webkit-scrollbar {width:6px;}
+.timeline.scrollable::-webkit-scrollbar-thumb {
+  background: var(--sage-300);
+  border-radius: 6px;
+}
 
 /* Gallery */
 .gallery{
@@ -268,40 +313,6 @@ footer{
 .note{font-size:.95rem; color:var(--muted)}
 .spacer{height:1.2rem}
 
-/* Make itinerary cards same height with scrollable inner timeline */
-.grid.cols-2 .card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.timeline.scrollable {
-  max-height: 300px;
-  overflow-y: auto;
-  padding-left: 1.5rem;
-  padding-right: 0.5rem;
-  position: relative;
-}
-
-.timeline.scrollable::before {
-  content: "";
-  position: absolute;
-  left: 12px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--sage-300);
-  z-index: 0;
-}
-
-.timeline.scrollable::-webkit-scrollbar {
-  width: 6px;
-}
-.timeline.scrollable::-webkit-scrollbar-thumb {
-  background: var(--sage-300);
-  border-radius: 6px;
-}
-
 /* Function modals */
 .modal-overlay {
   position: fixed;
@@ -325,10 +336,7 @@ footer{
   animation: fadeIn .25s ease-in-out;
 }
 
-.modal-content {
-  position: relative;
-}
-
+.modal-content {position: relative;}
 .modal .close {
   position: absolute;
   top: 0.4rem;
@@ -339,13 +347,12 @@ footer{
   color: var(--muted);
   cursor: pointer;
 }
-
 @keyframes fadeIn {
   from {opacity: 0; transform: translate(-50%, -48%);}
   to {opacity: 1; transform: translate(-50%, -50%);}
 }
 
-/* Subtle hover style for cards */
+/* Card hover */
 .function-card {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
