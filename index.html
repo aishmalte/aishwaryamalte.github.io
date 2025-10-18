@@ -75,12 +75,23 @@
 
   <script>
     // --- Mobile menu toggle ---
-    function toggleMenu(close){
-      const m = document.getElementById('menuMobile');
-      const isHidden = m.hasAttribute('hidden');
-      if(close){ m.setAttribute('hidden',''); return; }
-      if(isHidden){ m.removeAttribute('hidden'); } else { m.setAttribute('hidden',''); }
-    }
+function toggleMenu(close) {
+  const m = document.getElementById('menuMobile');
+  if (!m) return;
+  if (close) {
+    m.setAttribute('hidden', '');
+    m.classList.remove('show');
+    return;
+  }
+  const isHidden = m.hasAttribute('hidden');
+  if (isHidden) {
+    m.removeAttribute('hidden');
+    m.classList.add('show');
+  } else {
+    m.setAttribute('hidden', '');
+    m.classList.remove('show');
+  }
+}
 
     // Track current language
     let currentLang = 'en';
@@ -130,14 +141,29 @@
       }
     }
 
-    // --- Handle desktop nav clicks ---
-    document.querySelectorAll("#menu a").forEach(a => {
-      a.addEventListener("click", e => {
-        e.preventDefault();
-        const id = a.getAttribute("href").replace("#", "");
-        loadSection(id);
-      });
+// --- Handle both desktop and mobile nav clicks ---
+function attachNavListeners() {
+  document.querySelectorAll("#menu a, #menuMobile a").forEach(a => {
+    a.addEventListener("click", e => {
+      e.preventDefault();
+      const id = a.getAttribute("href").replace("#", "");
+      loadSection(id);
+      toggleMenu(true); // closes mobile menu after clicking
     });
+  });
+
+  // Also for CTA buttons on the homepage (like RSVP / Itinerary)
+  document.querySelectorAll(".cta a").forEach(a => {
+    a.addEventListener("click", e => {
+      e.preventDefault();
+      const id = a.getAttribute("href").replace("#", "");
+      loadSection(id);
+    });
+  });
+}
+
+// Attach once page is ready
+document.addEventListener("DOMContentLoaded", attachNavListeners);
 
     // --- Handle dynamic read-more links ---
     document.addEventListener("click", function(e) {
