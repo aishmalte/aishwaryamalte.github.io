@@ -492,6 +492,14 @@ a.read-more:hover {
   transform-origin: right;
 }
 
+/* Make Google Translate pill stay on the far right */
+.menu .translate-pill {
+  margin-left: auto !important;
+  transform: scale(0.9);
+  transform-origin: right center;
+}
+
+
 /* Hide all default text & Google branding */
 .goog-logo-link,
 .goog-te-gadget span,
