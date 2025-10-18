@@ -384,3 +384,18 @@ section .card h3 { margin-top: 1.5rem }
   border-radius: 12px;
 }
 
+/* Small Drive link button */
+.btn.small {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 999px;
+  background: var(--sage-500);
+  color: white;
+  transition: background 0.2s ease;
+  margin-top: 0.6rem;
+}
+.btn.small:hover {
+  background: var(--sage-700);
+}
