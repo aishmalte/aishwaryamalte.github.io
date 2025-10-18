@@ -58,10 +58,10 @@ a:hover { text-decoration: underline }
   letter-spacing: .4px;
 }
 .brand .logo-img {
-  height: 42px;
+  height: 84px; 
   width: auto;
   object-fit: contain;
-  border-radius: 6px;
+  border-radius: 10px;
   display: inline-block;
   vertical-align: middle;
 }
