@@ -41,13 +41,13 @@
   function checkCode() {
     const code = document.getElementById('code').value.trim();
 
-    if (code === 'A2026') |(code === 'a2026') {
+    if (code === 'A2026' || code === 'a2026') {
       // Save permission in browser memory
       sessionStorage.setItem('weddingAccess', 'full');
       // Redirect to full wedding site
       window.location.href = 'index.html';
     } 
-    else if (code === 'R2026') | (code === 'r2026'){
+    else if (code === 'R2026' || code === 'r2026'){
       sessionStorage.setItem('weddingAccess', 'reception');
       window.location.href = 'receptionpage.html';
     } 
