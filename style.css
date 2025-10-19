@@ -416,6 +416,25 @@ section .card h3 { margin-top: 1.5rem }
   background: var(--sage-700);
 }
 
+/* --- Side-by-side file buttons --- */
+.btn-row {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+/* Make both buttons same width look & feel */
+.btn.small.alt {
+  background: var(--sage-300);
+  color: var(--sage-900);
+}
+.btn.small.alt:hover {
+  background: var(--sage-500);
+  color: white;
+}
+
+
 /* ================= READ MORE BUTTON STYLE ================= */
 a.read-more {
   display: inline-block;
