@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome — Aishwarya & Malte</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    body {
+      text-align:center;
+      margin-top: 15vh;
+    }
+    h1 { color: var(--sage-900); margin-bottom: 1rem; }
+    input {
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--sage-300);
+      font-size: 1rem;
+      width: 200px;
+      text-align:center;
+    }
+    button {
+      background: var(--sage-500);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-left: 0.5rem;
+    }
+    button:hover { background: var(--sage-700); }
+  </style>
+</head>
+<body>
+  <h1>Aishwarya &amp; Malte’s Celebration</h1>
+  <p>Please enter your guest code:</p>
+  <input type="password" id="code" placeholder="Enter code">
+  <button onclick="checkCode()">Enter</button>
+
+  <script>
+    function checkCode() {
+      const code = document.getElementById('code').value.trim();
+      if (code === 'A2026') {
+        window.location.href = 'index.html'; // Full wedding
+      } else if (code === 'R2026') {
+        window.location.href = 'reception.html'; // Reception-only version
+      } else {
+        alert('Invalid code. Please check and try again.');
+      }
+    }
+  </script>
+</body>
+</html>
