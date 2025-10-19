@@ -37,17 +37,24 @@
   <input type="password" id="code" placeholder="Enter code">
   <button onclick="checkCode()">Enter</button>
 
-  <script>
-    function checkCode() {
-      const code = document.getElementById('code').value.trim();
-      if (code === 'A2026') {
-        window.location.href = 'index.html'; // Full wedding
-      } else if (code === 'R2026') {
-        window.location.href = 'receptionpage.html'; // Reception-only version
-      } else {
-        alert('Invalid code. Please check and try again.');
-      }
+<script>
+  function checkCode() {
+    const code = document.getElementById('code').value.trim();
+
+    if (code === 'A2026') {
+      // Save permission in browser memory
+      sessionStorage.setItem('weddingAccess', 'full');
+      // Redirect to full wedding site
+      window.location.href = 'index.html';
+    } 
+    else if (code === 'R2026') {
+      sessionStorage.setItem('weddingAccess', 'reception');
+      window.location.href = 'receptionpage.html';
+    } 
+    else {
+      alert('Invalid code. Please check and try again.');
     }
-  </script>
+  }
+</script>
 </body>
 </html>
