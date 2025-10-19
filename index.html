@@ -12,6 +12,11 @@
   <link rel="stylesheet" href="./style.css?v=5">
 </head>
 <body>
+<script>
+  if (!sessionStorage.getItem('weddingAccess')) {
+    window.location.href = 'access.html';
+  }
+</script>
   <!-- ====================== NAV ======================= -->
   <nav class="nav">
     <div class="wrap nav-inner">
