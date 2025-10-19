@@ -32,7 +32,8 @@
   </style>
 </head>
 <body>
-  <h1>Aishwarya &amp; Malte’s Celebration</h1>
+  <h1>Aishwarya &amp; Malte’s Wedding</h1>
+  <h2>You're invited!</h2>
   <p>Please enter your guest code:</p>
   <input type="password" id="code" placeholder="Enter code">
   <button onclick="checkCode()">Enter</button>
@@ -41,13 +42,13 @@
   function checkCode() {
     const code = document.getElementById('code').value.trim();
 
-    if (code === 'A2026') {
+    if (code === 'A2026') |(code === 'a2026') {
       // Save permission in browser memory
       sessionStorage.setItem('weddingAccess', 'full');
       // Redirect to full wedding site
       window.location.href = 'index.html';
     } 
-    else if (code === 'R2026') {
+    else if (code === 'R2026') | (code === 'r2026'){
       sessionStorage.setItem('weddingAccess', 'reception');
       window.location.href = 'receptionpage.html';
     } 
