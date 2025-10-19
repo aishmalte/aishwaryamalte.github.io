@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reception — Aishwarya & Malte</title>
+  <meta name="description" content="Reception celebrations of Aishwarya & Malte — 26 February 2026." />
+  <link rel="stylesheet" href="./style.css?v=5">
+</head>
+
+<body>
+  <!-- ====================== NAV ======================= -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand" onclick="goHome()" style="cursor:pointer">
+        <img class="logo-img" src="./images/logo.png" alt="Aishwarya & Malte logo">
+        <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====================== HERO ======================= -->
+  <header class="hero" id="home"></header>
+
+  <!-- ====================== INTRO (Reception Banner) ======================= -->
+  <section class="intro-section" id="intro">
+    <div class="wrap text-center">
+      <div class="chip">You're invited!</div>
+      <h1 class="names">Aishwarya &amp; Malte</h1>
+      <p class="date">Reception Celebration — <strong>26 February 2026</strong></p>
+      <p class="note">We’re thrilled to celebrate this special day with you!</p>
+      <div class="cta">
+        <a class="btn primary" href="#rsvp">RSVP</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== RECEPTION ITINERARY ======================= -->
+  <section id="itinerary" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Reception Itinerary</h2>
+      </div>
+
+      <div class="card">
+        <h3>Reception — 26 February 2026</h3>
+        <ul>
+          <li><strong>Arrival &amp; Welcome Drinks:</strong> 6:30 PM onwards</li>
+          <li><strong>Reception &amp; Dinner:</strong> 8:00 PM onwards</li>
+          <li><strong>Venue:</strong> Mapple Gold Banquet, Radisson, New Delhi</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== RSVP SECTION ======================= -->
+  <section id="rsvp" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>RSVP</h2>
+        <p class="note">Please confirm your presence so we can plan accordingly ✨</p>
+      </div>
+
+      <div class="card text-center">
+        <p>We’d love to know if you’ll join us for the reception!</p>
+        <a class="btn primary" href="YOUR-RSVP-GOOGLE-FORM-LINK" target="_blank">Fill RSVP Form</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== VENUE SECTION ======================= -->
+  <section id="venue" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Venue</h2>
+      </div>
+
+      <div class="card">
+        <p><strong>Mapple Gold Banquet, Radisson Blu, New Delhi</strong></p>
+        <p>Below is the location link to help you reach easily:</p>
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.7287120467413!2d77.08949707449545!3d28.667840582478178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d05a83df50807%3A0x7aae924d0fe819dc!2sMapple%20Gold%20Banquet!5e0!3m2!1sen!2sde!4v1760787829431!5m2!1sen!2sde"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== FOOTER ======================= -->
+  <footer>
+    <div class="wrap text-center">
+      © <span id="y"></span> Malte &amp; Aishwarya — With love from our families ✨
+    </div>
+  </footer>
+
+  <script>
+    // Go home (reload)
+    function goHome() {
+      window.location.href = 'receptionpage.html';
+    }
+    // Dynamic year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
