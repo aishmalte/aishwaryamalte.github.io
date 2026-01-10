@@ -32,7 +32,7 @@
   </style>
 </head>
 <body>
-  <h2>You're invited to <br> Aishwarya &amp; Malte’s Wedding Celebrations!</h2>
+  <h2>Thank you for joining, you're invited to <br> Aishwarya &amp; Malte’s Wedding Celebrations!</h2>
   <p>Please enter your guest code:</p>
   <input type="password" id="code" placeholder="Enter code">
   <button onclick="checkCode()">Enter</button>
@@ -50,6 +50,10 @@
     else if (code === 'GS2026' || code === 'gs2026'){
       sessionStorage.setItem('weddingAccess', 'reception');
       window.location.href = 'receptionpage.html';
+    } 
+    else if (code === 'HELLO' || code === 'hello'){
+      sessionStorage.setItem('weddingAccess', 'receptionIndia');
+      window.location.href = 'receptionIndia.html';
     } 
     else {
       alert('Invalid code. Please check and try again.');
