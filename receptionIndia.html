@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aishwarya & Malte</title>
+  <meta name="description" content="Join us to welcome the new couple Aishwarya & Malte on 26 February 2026." />
+  <link rel="stylesheet" href="./style.css?v=5">
+</head>
+
+<body>
+  <!-- ====================== NAV ======================= -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand" onclick="goHome()" style="cursor:pointer">
+        <img class="logo-img" src="./images/GanpatiBappa2.png" alt="GanpatiBappa">
+        <img class="logo-img" src="./images/ourLogoNew.png" alt="Aishwarya & Malte logo">
+        <span>Aishwarya&nbsp;&amp;&nbsp;Malte</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====================== HERO ======================= -->
+  <header class="hero" id="home"></header>
+
+  <!-- ====================== INTRO (Reception Banner) ======================= -->
+  <section class="intro-section" id="intro">
+    <div class="wrap text-center">
+      <div class="chip">We would love it if you can join!</div>
+      <p class="note">We'd like to invite you to the reception party, following the wedding of</p>
+      <h1 class="names">Aishwarya &amp; Malte</h1>
+      <p class="date">Reception Celebration on <strong>26<sup>th</sup> February 2026</strong></p>
+      <p class="note">We really hope you can join us!</p>
+    </div>
+  </section>
+
+  <!-- ====================== RECEPTION ITINERARY ======================= -->
+  <section id="itinerary" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Reception Itinerary</h2>
+      </div>
+
+      <div class="card">
+        <h3>Reception — 26<sup>th</sup> February 2026</h3>
+        <ul>
+          <li><strong>Arrival &amp; Welcome:</strong> 7:00 PM onwards</li>
+          <li><strong>Reception &amp; Dinner:</strong> 8:00 PM onwards</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== RSVP SECTION ======================= -->
+  <section id="rsvp" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>RSVP</h2>
+        <p class="note">We’d love to know if you’ll join us for the reception! ✨</p>
+      </div>
+
+<div class="card text-center">
+  <p>We request you to please confirm your presence so we can plan accordingly. </p>
+      <p class="note">
+        <strong>Nitin Girdhar:</strong> +91-9899889721<br>
+        <strong>Mukta Girdhar:</strong> +91-9818851737<br>
+      </p>
+
+  <!-- 
+  <div class="form-frame">
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScRnSQ7g0e65pGu8V2wlRRaJ8dtrhQn4bROUcDmbqibtDFejQ/viewform?embedded=true" width="640" height="702" frameborder="0" marginheight="0" marginwidth="0">Wird geladen…</iframe>
+  </div>
+</div>
+    </div>
+  -->
+</section>
+
+  <!-- ====================== VENUE SECTION ======================= -->
+  <section id="venue" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Venue</h2>
+      </div>
+
+      <div class="card">
+        <p><strong>Radisson Blu Paschim Vihar, Maple Gold Banquet, Hall No. 6, New Delhi</strong></p>
+        <p>Below is the location link to help you reach easily:</p>
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.7287120467413!2d77.08949707449545!3d28.667840582478178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d05a83df50807%3A0x7aae924d0fe819dc!2sMapple%20Gold%20Banquet!5e0!3m2!1sen!2sde!4v1760787829431!5m2!1sen!2sde"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== FOOTER ======================= -->
+  <footer>
+    <div class="wrap text-center">
+      © <span id="y"></span> Malte &amp; Aishwarya — With love and gratitude from Girdhar and Scherbarth families. ✨
+    </div>
+  </footer>
+
+  <script>
+    // Go home (reload)
+    function goHome() {
+      window.location.href = 'receptionpage.html';
+    }
+    // Dynamic year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
