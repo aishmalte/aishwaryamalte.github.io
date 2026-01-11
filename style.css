@@ -565,3 +565,34 @@ a.read-more:hover {
   margin-left: 3px;
 }
 
+/* To make names appear as two columns. */
+.names-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.right {
+  text-align: right;
+}
+
+.names-grid h2 {
+  margin-bottom: 0.3rem;
+}
+
+.names-grid p {
+  margin-top: 0;
+  font-size: 0.9rem;
+}
+
