@@ -158,7 +158,9 @@ a:hover { text-decoration: underline }
   background: none;
   z-index: 0;
 }
-
+body.reception-page .hero {
+  background: url("images/banner3.jpeg") center/cover no-repeat;
+}
 /* --- Overlay card for other pages --- */
 .hero.with-card {
   display: grid;
