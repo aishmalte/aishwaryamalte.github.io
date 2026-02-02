@@ -158,8 +158,12 @@ a:hover { text-decoration: underline }
   background: none;
   z-index: 0;
 }
-body.reception-page .hero {
-  background: url("images/banner3.jpeg") center/cover no-repeat;
+body.reception-page .hero{
+  background-image: url("images/banner3.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;   /* <- key */
+  background-color: #000;     /* fill empty space (choose your color) */
 }
 /* --- Overlay card for other pages --- */
 .hero.with-card {
